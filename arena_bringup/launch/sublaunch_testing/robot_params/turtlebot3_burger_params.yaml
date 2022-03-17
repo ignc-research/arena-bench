@@ -1,0 +1,11 @@
+radius: 0.113
+speed: 0.22
+robot_action_rate: 10
+laser_update_rate: 10
+# the following 4 params are from the .gazebo.axro model
+laser_min: 0.0
+laser_max: 6.283
+laser_increment: 0.0175019223243
+laser_range: 3.5
+laser_beams: 360
+rot_speed: 2.84 # [rad/s]

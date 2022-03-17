@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="train_mode" default="false"/>
+  <arg name="local_planner" default="dwa"         doc = "local_planner type [teb, dwa, mpc, rlca, cadrl, arena, rosnav]"/>
+  <arg name="rviz_file" default="nav_LP"/>
+  <arg name="disable_scenario" default="false"/>
+  <arg name="reset" default="true"/>
+  <arg name="enable_pedsim" default="true"/>
+  <arg name="enable_pedvis" default="true"/>
+  <arg name="outside" default="false"/>
+  <arg name="network_type" default="rosnav" doc="Model type that is used. Will determine the observation and action space. Currently only rosnav is supported" />
+  <arg name="trainings_environment" default="rosnav" doc="Determines the environment in which the network is trained. How to load the network mostly differs for different environments. Currently rosnav and navrep are supported" />
+  <arg name="world" default="small_warehouse" doc ="world type [turtlebot3_house, small_warehouse, aws_house, outside, ignc_lab]" unless="$(arg outside)"/>
+  <arg name="world" default="outside" if = "$(arg outside)"/>
+  <arg name="model" default="jackal"      doc = "model type [turtlebot3_burger, jackal, ridgeback, agv-ota, rto, tiago, turtlebot3_waffle_pi]"/>
+  <arg name="agent_name" default="$(arg model)"     doc = "DRL agent name to be deployed" unless="$(eval arg('local_planner') != 'rosnav')"/>
+  <arg name="scenario_file" default="$(arg world).json"/>
+  <arg name="num_static_obs" default="3"/>
+  <arg name="step_size" default="0.01"/>
+  <arg name="update_rate" default="250"/>
+  <arg name="show_viz" default="true"/>
+  <arg name="viz_pub_rate" default="30" />
+  <arg name="use_rviz" default="true"/>
+  <!-- <arg name="headless" default="true"/>
+  <arg name="gui" default="false"/> -->
+  <arg name="headless" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="map_path" default="$(find simulator_setup)/maps/$(arg world)/map.yaml" />
+  <arg name="task_mode" default="scenario" doc="task_mode type [scenario, random, manual, staged]"/>
+  <arg name="actors" default="0" unless="$(arg train_mode)" />
+  <arg name="actor_height" default="1.1"/>
+  <arg name="use_recorder" default="false"/>
+  <arg name="record_only_planner" default="true"/>
+  <arg name="add_map_path" default=""/>
+  <arg name="additional_map" default="false"/>
+  <arg name="waypoint_generator" default="classic"/>
+  <arg name="obs_vel" default="0.3" />
+  <arg name="action_frequency" default="10"/>
+  <arg name="global_frame_id" value="map"/>
+  <arg name="odom_frame_id" value="odom"/>
+  <arg name="base_frame_id" value="base_footprint"/>
+  <arg name="odom_ground_truth" default="/odometry/ground_truth"/>
+  <arg name="simulation_factor" default="1"/>
+  <arg name="pedsim_update_rate" default="30.0"/>
+  <arg name="scene_file" default="$(find simulator_setup)/scenarios/ped_scenarios/$(arg world).xml"/>
+  <arg name="real" default="false"/>
+  <arg name="emergency_brake" default="false"/>
+  <arg name="timeout" default="3.0"/>
+
+  <!-- Path visualization -->
+  <arg name="viz_path" default="true"/>
+  <arg name="path_color" default="red" doc="Colors available: red, green, blue, light blue, yellow, pink, purple"/>
+
+  <param name="additional_map" value="$(arg additional_map)"/>
+  <param name="local_planner" value="$(arg local_planner)"/>
+  <param name="actors" value="$(arg actors)" unless="$(arg train_mode)" />
+  <param name="use_sim_time" value="true"/>
+  <param name="train_mode" value="$(arg train_mode)" />
+  <param name="world" value="$(arg world)" />
+  <param name="model" value="$(arg model)" />
+  <param name="agent_name" value="$(arg agent_name)" unless="$(eval arg('local_planner') != 'rosnav')"/>
+  <param name="trainings_environment" value="$(arg trainings_environment)" />
+  <param name="network_type" value="$(arg network_type)" />
+  <param name="update_rate" value="$(arg update_rate)" />
+  <param name="step_size" value="$(arg step_size)" />
+  <param name="show_viz" value="$(arg show_viz)"/>
+  <param name="viz_pub_rate" value="$(arg viz_pub_rate)"/>
+  <param name="use_rviz" value="$(arg use_rviz)"/>
+  <param name="single_env" value="true"/>
+  <param name="actor_height" value="$(arg actor_height)" unless="$(eval arg('world') == 'arena_generated')"/>
+  <param name="actor_height" value="1.03" if="$(eval arg('world') == 'arena_generated')"/>
+  <param name="num_static_obs" value="$(arg num_static_obs)"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find simulator_setup)/robot/$(arg model)/urdf/$(arg model).urdf.xacro"/>
+  <param name="obs_vel" value="$(arg obs_vel)" />
+  <param name="action_frequency" value="$(arg action_frequency)"/>
+  <param name="real" value="$(arg real)"/>
+  <param name="viz_path" value="$(arg viz_path)"/>
+  <param name="path_color" value="$(arg path_color)"/>
+
+
+  <!-- Adding actors to world  -->
+  <group if="$(eval arg('train_mode') == false)">
+    <node name="generate_world" pkg="task_generator" type="generate_world.py">
+      <param name="task_mode" value="$(arg task_mode)"/>
+      <param name="actors" value="$(arg actors)"/>
+      <param name="scenario_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
+    </node>
+  </group>
+
+  <!-- Managing our Robots-->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/robots.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="real" value="$(arg real)"/>
+  </include>
+
+
+  <!-- map server-->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_path)">
+    <param name="frame_id" value="$(arg global_frame_id)"/>
+  </node>
+
+  <!-- additional map server, for obstacles  -->
+  <node name="map_server" pkg="map_server" type="map_server" ns="additional_map" args="$(arg add_map_path)" if="$(arg additional_map)">
+    <param name="additional_map/frame_id" value="$(arg global_frame_id)"/>
+  </node>
+
+  <!-- data recorder -->
+  <group if="$(eval arg('use_recorder') == true)">
+    <node pkg="arena_evaluation" name="data_recorder_node" type="data_recorder_node.py" />
+    <param name="local_planner" value="$(arg local_planner)"/>
+    <param name="waypoint_generator" value="$(arg waypoint_generator)"/>
+    <param name="record_only_planner" value="$(arg record_only_planner)"/>
+    <param name="scenario_file" value="$(arg scenario_file)"/>
+    <param name="model" value="$(arg model)"/>
+  </group>
+
+  <group if="$(eval arg('viz_path') == true)">
+    <node pkg="eval" name="viz_path" type="viz_path.py"/>
+    <!-- <param name="local_planner" value="$(arg local_planner)"/> -->
+  </group>
+
+  <!-- use simulator-->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/gazebo_simulator.launch">
+    <arg name="world" value="$(arg world)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="gui" value="$(arg gui)"/>
+  </include>
+
+
+  <!-- provide map to odom trasform once-->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/fake_localization.launch">
+    <arg name="global_frame_id" value="$(arg global_frame_id)"/>
+    <arg name="odom_frame_id" value="$(arg odom_frame_id)"/>
+  </include>
+
+  <!-- start task_generator node -->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/task_generator.launch" unless="$(eval arg('disable_scenario') or arg('train_mode'))">
+    <arg name="scenarios_json_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
+    <arg name="auto_reset" value="$(arg reset)"/>
+    <arg name="timeout" value="$(arg timeout)"/>
+    <arg name="world" value="$(arg world)"/>
+    <arg name="task_mode" value="$(arg task_mode)"/>
+    <arg name="actors" value="$(arg actors)"/>
+  </include>
+
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/sensor_sim.launch" unless="$(eval arg('disable_scenario') or arg('train_mode'))"/>
+
+  <!-- move_base plan manager: which provide basic global planner and cost map -->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/move_base/move_base_$(arg local_planner).launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="cmd_vel_topic" value="/nav_vel" if="$(arg emergency_brake)" />
+    <arg name="agent_name" value="$(arg model)" if="$(eval arg('local_planner') == 'rosnav')" />
+    <arg name="trainings_environment" value="$(arg trainings_environment)" if="$(eval arg('local_planner') == 'rosnav')" />
+    <!-- <arg name="speed" value="$(param speed)"/> -->
+  </include>
+
+  <!-- <include file="$(find arena_bringup)/launch/sublaunch_testing/plan_manager.launch">
+    <arg name="train_mode" value="$(arg train_mode)"/>
+    <arg name="global_frame_id" value="$(arg global_frame_id)"/>
+    <arg name="odom_frame_id" value="$(arg odom_frame_id)"/>
+    <arg name="base_frame_id" value="$(arg base_frame_id)"/>
+    <arg name="look_ahead_distance" default="2.3"/>
+    <arg name="tolerance_approach" default="0.6"/>
+    <arg name="timeout_goal" default="330."/>
+    <arg name="timeout_subgoal" default="20"/>
+  </include> -->
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/intermediate_planner.launch"/>
+
+
+  <!-- Pedsim is not used in scenario mode since here the actor concept is being used -->
+  <group unless="$(eval arg('task_mode') == 'scenario')">
+    <!-- start Pedsim -->
+    <node name="pedsim_simulator" pkg="pedsim_simulator" type="pedsim_simulator" output="screen" if="$(arg enable_pedsim)">
+      <param name="simulation_factor" value="$(arg simulation_factor)" type="double"/>
+      <param name="pedsim_update_rate" value="$(arg pedsim_update_rate)" type="double"/>
+      <param name="scene_file" value="$(arg scene_file)" type="string"/>
+    </node>
+
+    <node name="pedsim_visualizer" type="pedsim_visualizer_node" pkg="pedsim_visualizer" output="screen" if="$(arg enable_pedvis)"/>
+  </group>
+
+  <!-- start_rviz -->
+  <node name="gazebo_rviz" pkg="rviz" type="rviz" args="-d $(find arena_bringup)/rviz/$(arg rviz_file).rviz" if="$(arg use_rviz)"/>
+
+  <node name="emergency_brake" pkg="task_generator" type="emergency_brake_node.py" if="$(arg emergency_brake)"/>
+</launch>
