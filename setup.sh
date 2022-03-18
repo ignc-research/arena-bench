@@ -132,6 +132,7 @@ echo "export WORKON_HOME=$HOME/python_env   #path to your venv folder
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3   #path to your python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.${CURSHELL}rc
+source /usr/local/bin/virtualenvwrapper.sh
 source ~/.${CURSHELL}rc
 
 source /opt/ros/${ROS_NAME_VERSION}/setup.${CURSHELL}
