@@ -24,7 +24,7 @@ Below is the software we used. We cannot guarantee older versions of the softwar
 ### Installation
 To install the repo run:
 ```bash
-wget https://raw.githubusercontent.com/ignc-research/arena-bench/setup.sh -O - | bash
+wget https://raw.githubusercontent.com/ignc-research/arena-bench/main/setup.sh -O - | bash
 ```
 ### Manually running the benchmark
 ---
