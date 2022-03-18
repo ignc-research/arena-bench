@@ -14,34 +14,33 @@ read
 echo "[Set the target OS, ROS version and name of catkin workspace]"
 
 # Install Python packages (preferably in your virtual environment):
-if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
-    # assume Zsh
-    CURSHELL=zsh
-    echo "Currently using zsh."
-elif [ -n "`$SHELL -c 'echo $BASH_VERSION'`" ]; then
-    # assume Bash
-    CURSHELL=bash
-    echo "Currently using bash."
+if [ -n "$($SHELL -c 'echo $ZSH_VERSION')" ]; then
+  # assume Zsh
+  CURSHELL=zsh
+  echo "Currently using zsh."
+elif [ -n "$($SHELL -c 'echo $BASH_VERSION')" ]; then
+  # assume Bash
+  CURSHELL=bash
+  echo "Currently using bash."
 else
-    # assume something else
-    echo "Currently only Bash and ZSH are supported for an automatic install. Please refer to the manual installation if you use any other shell."
+  # assume something else
+  echo "Currently only Bash and ZSH are supported for an automatic install. Please refer to the manual installation if you use any other shell."
 fi
 
 case $(lsb_release -sc) in
-  focal)
-    ROS_NAME_VERSION=noetic
-    ;;
+focal)
+  ROS_NAME_VERSION=noetic
+  ;;
 
-  bionic)
-    ROS_NAME_VERSION=melodic
-    ;;
+bionic)
+  ROS_NAME_VERSION=melodic
+  ;;
 
-  *)
-    echo "Currently only Ubuntu Bionic Beaver and Focal Fossa are supported for an automatic install. Please refer to the manual installation if you use any Linux release or version."
-    exit 1
-    ;;
+*)
+  echo "Currently only Ubuntu Bionic Beaver and Focal Fossa are supported for an automatic install. Please refer to the manual installation if you use any Linux release or version."
+  exit 1
+  ;;
 esac
-
 
 name_os_version=${name_os_version:="focal"}
 name_ros_version=${name_ros_version:="noetic"}
@@ -62,13 +61,13 @@ if [ ! -e /etc/apt/sources.list.d/ros-latest.list ]; then
 fi
 
 echo "[Download the ROS keys]"
-roskey=`apt-key list | grep "Open Robotics"`
+roskey=$(apt-key list | grep "Open Robotics")
 if [ -z "$roskey" ]; then
   curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 fi
 
 echo "[Check the ROS keys]"
-roskey=`apt-key list | grep "Open Robotics"`
+roskey=$(apt-key list | grep "Open Robotics")
 if [ -n "$roskey" ]; then
   echo "[ROS key exists in the list]"
 else
@@ -103,35 +102,33 @@ sh -c "echo \"export ROS_HOSTNAME=localhost\" >> ~/.${CURSHELL}rc"
 
 source $HOME/.${CURSHELL}rc
 
-
-
 # install required dependencies + virtual env
 sudo apt-get update && sudo apt-get install -y \
-libopencv-dev \
-liblua5.2-dev \
-screen \
-python3-rosdep \
-python3-rosinstall \
-python3-rosinstall-generator \
-build-essential \
-python3-rospkg-modules \
-ros-noetic-navigation \
-ros-noetic-teb-local-planner \
-ros-noetic-mpc-local-planner \
-libarmadillo-dev \
-ros-noetic-nlopt \
-ros-noetic-turtlebot3-description \
-ros-noetic-turtlebot3-navigation \
-ros-noetic-lms1xx \
-ros-noetic-velodyne-description 
+  libopencv-dev \
+  liblua5.2-dev \
+  screen \
+  python3-rosdep \
+  python3-rosinstall \
+  python3-rosinstall-generator \
+  build-essential \
+  python3-rospkg-modules \
+  ros-noetic-navigation \
+  ros-noetic-teb-local-planner \
+  ros-noetic-mpc-local-planner \
+  libarmadillo-dev \
+  ros-noetic-nlopt \
+  ros-noetic-turtlebot3-description \
+  ros-noetic-turtlebot3-navigation \
+  ros-noetic-lms1xx \
+  ros-noetic-velodyne-description
 sudo apt install -y python3-pip
 sudo pip3 install --upgrade pip
 sudo pip3 install virtualenv virtualenvwrapper
-cd $HOME && mkdir python_env   # create a venv folder in your home directory
+cd $HOME && mkdir python_env # create a venv folder in your home directory
 echo "export WORKON_HOME=$HOME/python_env   #path to your venv folder
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3   #path to your python3
 export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-source /usr/local/bin/virtualenvwrapper.sh" >> ~/.${CURSHELL}rc
+source /usr/local/bin/virtualenvwrapper.sh" >>~/.${CURSHELL}rc
 source /usr/local/bin/virtualenvwrapper.sh
 source ~/.${CURSHELL}rc
 mkvirtualenv --python=python3.8 rosnav
@@ -144,85 +141,65 @@ workon rosnav
 pip3 install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed
 pip3 install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml numpy scikit-image Pillow rospkg tensorflow
 pip3 install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed \
-pip3 install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml 
+  pip3 install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml
 pip install PyQt5 --upgrade
 
+sudo apt-get -y update && apt-get install -y \
+  software-properties-common \
+  wget \
+  curl \
+  apt-utilsgnutls-bin \
+  vim \
+  git \
+  original-awk \
+  python3-pip \
+  screen \
+  libopencv-dev \
+  liblua5.2-dev &&
+  add-apt-repository ppa:rock-core/qt4 &&
+  apt-get install -y libqtcore4
 
 sudo apt-get -y update && apt-get install -y \
-software-properties-common \
-wget \
-curl \
-apt-utils\
-gnutls-bin \
-vim \
-git \
-original-awk \
-python3-pip \
-screen \
-libopencv-dev \
-liblua5.2-dev \
-&& add-apt-repository ppa:rock-core/qt4 \
-&& apt-get install -y libqtcore4
-
-
-sudo apt-get -y update && apt-get install -y \
-python3-rosdep \
-python3-rosinstall \
-python3-rosinstall-generator \
-build-essential \
-python3-rospkg-modules \
-ros-noetic-navigation \
-ros-noetic-teb-local-planner \
-ros-noetic-mpc-local-planner \
-libarmadillo-dev \
-ros-noetic-nlopt \
-ros-noetic-turtlebot3-description \
-ros-noetic-turtlebot3-navigation \
-ros-noetic-lms1xx \
-ros-noetic-velodyne-description \
-python3-catkin-pkg-modules \
-python3-rospkg-modules \
-python3-empy \
-python3-setuptools \
-libarmadillo-dev \
-ros-noetic-pcl-conversions\
-ros-noetic-pcl-ros\
-ros-noetic-desktop-full
-
+  python3-rosdep \
+  python3-rosinstall \
+  python3-rosinstall-generator \
+  build-essential \
+  python3-rospkg-modules \
+  ros-noetic-navigation \
+  ros-noetic-teb-local-planner \
+  ros-noetic-mpc-local-planner \
+  libarmadillo-dev \
+  ros-noetic-nlopt \
+  ros-noetic-turtlebot3-description \
+  ros-noetic-turtlebot3-navigation \
+  ros-noetic-lms1xx \
+  ros-noetic-velodyne-description \
+  python3-catkin-pkg-modules \
+  python3-empy \
+  python3-setuptools \
+  libarmadillo-dev \
+  ros-noetic-pcl-conversionsros-noetic-pcl-rosros-noetic-desktop-full
 
 ## 4.1. Install base arena-bench
-cd $HOME 
-mkdir -p catkin_ws/src && cd catkin_ws/src 
-git clone https://github.com/ignc-research/arena-bench -b main 
-cd arena-bench
-rosws update 
-cd ../.. 
-catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3 
+cd $HOME && mkdir -p catkin_ws/src && cd catkin_ws/src
+git clone https://github.com/ignc-research/arena-bench -b main
+cd arena-bench && rosws update && cd ../..
+catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 source ~/.${CURSHELL}r
 echo $'\n \
 source $HOME/catkin_ws/devel/setup.sh \n\
-export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >> ~/.${CURSHELL}rc 
+export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
 
 ## 4.2. Include the actor-collision plugin
-cd $HOME
-git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
-cd ActorCollisionsPlugin
-mkdir build
-cd build
-cmake ..
-make
-echo
+cd $HOME && git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
+cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
 "export GAZEBO_PLUGIN_PATH=$HOME/ActorCollisionsPlugin/build "
->> ~/.${CURSHELL}rc 
-source ~/.${CURSHELL}rc
+>>~/.${CURSHELL}rc && source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim
-sudo apt install python3-rosdep python3-rospkg
-cd ~/catkin_ws/src/arena-bench
-rosws update
-cd ~/catkin_ws
+cd ~/catkin_ws/src/arena-bench && rosws update && cd ~/catkin_ws
 rosdep install --from-paths src --ignore-src -r -y
 cd ~/catkin_ws/src/forks/pedsim_ros
-git submodule update --init --recursive 
-cd ../../.. && catkin_make --only-pkg-with-deps spencer_tracking_rviz_plugin 
-catkin_make -DCATKIN_WHITELIST_PACKAGES="" 
+git submodule update --init --recursive
+cd ../../.. && catkin_make --only-pkg-with-deps spencer_tracking_rviz_plugin
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""

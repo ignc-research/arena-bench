@@ -44,7 +44,6 @@
   <arg name="pedsim_update_rate" default="30.0"/>
   <arg name="scene_file" default="$(find simulator_setup)/scenarios/ped_scenarios/$(arg world).xml"/>
   <arg name="real" default="false"/>
-  <arg name="emergency_brake" default="false"/>
   <arg name="timeout" default="3.0"/>
 
   <!-- Path visualization -->
@@ -79,13 +78,11 @@
 
 
   <!-- Adding actors to world  -->
-  <group if="$(eval arg('train_mode') == false)">
-    <node name="generate_world" pkg="task_generator" type="generate_world.py">
-      <param name="task_mode" value="$(arg task_mode)"/>
-      <param name="actors" value="$(arg actors)"/>
-      <param name="scenario_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
-    </node>
-  </group>
+  <node name="generate_world" pkg="task_generator" type="generate_world.py">
+    <param name="task_mode" value="$(arg task_mode)"/>
+    <param name="actors" value="$(arg actors)"/>
+    <param name="scenario_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
+  </node>
 
   <!-- Managing our Robots-->
   <include file="$(find arena_bringup)/launch/sublaunch_testing/robots.launch">
@@ -97,11 +94,6 @@
   <!-- map server-->
   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_path)">
     <param name="frame_id" value="$(arg global_frame_id)"/>
-  </node>
-
-  <!-- additional map server, for obstacles  -->
-  <node name="map_server" pkg="map_server" type="map_server" ns="additional_map" args="$(arg add_map_path)" if="$(arg additional_map)">
-    <param name="additional_map/frame_id" value="$(arg global_frame_id)"/>
   </node>
 
   <!-- data recorder -->
@@ -135,7 +127,7 @@
   </include>
 
   <!-- start task_generator node -->
-  <include file="$(find arena_bringup)/launch/sublaunch_testing/task_generator.launch" unless="$(eval arg('disable_scenario') or arg('train_mode'))">
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/task_generator.launch">
     <arg name="scenarios_json_path" value="$(find simulator_setup)/scenarios/$(arg scenario_file)"/>
     <arg name="auto_reset" value="$(arg reset)"/>
     <arg name="timeout" value="$(arg timeout)"/>
@@ -144,44 +136,18 @@
     <arg name="actors" value="$(arg actors)"/>
   </include>
 
-  <include file="$(find arena_bringup)/launch/sublaunch_testing/sensor_sim.launch" unless="$(eval arg('disable_scenario') or arg('train_mode'))"/>
+  <include file="$(find arena_bringup)/launch/sublaunch_testing/sensor_sim.launch"/>
 
   <!-- move_base plan manager: which provide basic global planner and cost map -->
   <include file="$(find arena_bringup)/launch/sublaunch_testing/move_base/move_base_$(arg local_planner).launch">
     <arg name="model" value="$(arg model)"/>
-    <arg name="cmd_vel_topic" value="/nav_vel" if="$(arg emergency_brake)" />
     <arg name="agent_name" value="$(arg model)" if="$(eval arg('local_planner') == 'rosnav')" />
     <arg name="trainings_environment" value="$(arg trainings_environment)" if="$(eval arg('local_planner') == 'rosnav')" />
     <!-- <arg name="speed" value="$(param speed)"/> -->
   </include>
 
-  <!-- <include file="$(find arena_bringup)/launch/sublaunch_testing/plan_manager.launch">
-    <arg name="train_mode" value="$(arg train_mode)"/>
-    <arg name="global_frame_id" value="$(arg global_frame_id)"/>
-    <arg name="odom_frame_id" value="$(arg odom_frame_id)"/>
-    <arg name="base_frame_id" value="$(arg base_frame_id)"/>
-    <arg name="look_ahead_distance" default="2.3"/>
-    <arg name="tolerance_approach" default="0.6"/>
-    <arg name="timeout_goal" default="330."/>
-    <arg name="timeout_subgoal" default="20"/>
-  </include> -->
   <include file="$(find arena_bringup)/launch/sublaunch_testing/intermediate_planner.launch"/>
-
-
-  <!-- Pedsim is not used in scenario mode since here the actor concept is being used -->
-  <group unless="$(eval arg('task_mode') == 'scenario')">
-    <!-- start Pedsim -->
-    <node name="pedsim_simulator" pkg="pedsim_simulator" type="pedsim_simulator" output="screen" if="$(arg enable_pedsim)">
-      <param name="simulation_factor" value="$(arg simulation_factor)" type="double"/>
-      <param name="pedsim_update_rate" value="$(arg pedsim_update_rate)" type="double"/>
-      <param name="scene_file" value="$(arg scene_file)" type="string"/>
-    </node>
-
-    <node name="pedsim_visualizer" type="pedsim_visualizer_node" pkg="pedsim_visualizer" output="screen" if="$(arg enable_pedvis)"/>
-  </group>
 
   <!-- start_rviz -->
   <node name="gazebo_rviz" pkg="rviz" type="rviz" args="-d $(find arena_bringup)/rviz/$(arg rviz_file).rviz" if="$(arg use_rviz)"/>
-
-  <node name="emergency_brake" pkg="task_generator" type="emergency_brake_node.py" if="$(arg emergency_brake)"/>
 </launch>

@@ -33,31 +33,7 @@ class TaskGenerator:
         # if auto_reset is set to true, the task generator will automatically reset the task
         # this can be activated only when the mode set to 'ScenarioTask'
         auto_reset = rospy.get_param("~auto_reset")
-        self.start_time_ = rospy.get_time() 
-        self.arena_gen = rospy.get_param("~world") == "arena_generated"
-
-        # arena generated mode - TODO This is currenly not supported by pedsim elias
-        if self.arena_gen:
-            self.load_map_service_client = rospy.ServiceProxy("change_map", LoadMap)
-            set_obstacles_service_name = "pedsim_simulator/set_obstacles"
-            rospy.wait_for_service(set_obstacles_service_name, 6.0)
-            self.pedsimMap_client_ = rospy.ServiceProxy(
-                set_obstacles_service_name, SetObstacles
-            )
-            self.spawn_map_client = rospy.ServiceProxy(
-                "/gazebo/spawn_sdf_model", SpawnModel
-            )
-            self.del_map_client_ = rospy.ServiceProxy(
-                "gazebo/delete_model", DeleteModel
-            )
-            self.sim = self.rospack.get_path("simulator_setup")
-            folder = pathlib.Path(self.rospack.get_path("simulator_setup") + "/maps/")
-            map_folders = [p for p in folder.iterdir() if p.is_dir()]
-            names = [p.parts[-1] for p in map_folders]
-            # get only the names that are in the form of f"map{index}"
-            prefix = "map"
-            pat = re.compile(f"{prefix}\d+$", flags=re.ASCII)
-            self.filtered_names = [name for name in names if pat.match(name) != None]
+        self.start_time_ = rospy.get_time()
 
         self.pub = rospy.Publisher('End_of_scenario', Bool, queue_size=10)
         self.unpause = rospy.ServiceProxy('/gazebo/unpause_physics', Empty)
@@ -113,18 +89,6 @@ class TaskGenerator:
         # return EmptyResponse()
 
     def reset_task(self):
-        if self.arena_gen and len(self.filtered_names) > 0:
-
-            self.del_map_client_("map")
-            new_map = self.filtered_names.pop()
-            self.load_map_service_client(self.sim + f"/maps/{new_map}/map.yaml")
-            request = SpawnModelRequest()
-            f = open(self.sim + f"/models/{new_map}/model.sdf")
-            request.model_xml = f.read()
-            request.model_name = "map"
-            self.spawn_map_client(request)
-            self.pedsimMap_client_(new_map)
-            clear_costmaps()
 
         self.start_time_ = rospy.get_time()
         if not self.first_round: self.pause()
