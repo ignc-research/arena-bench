@@ -188,18 +188,18 @@ ros-noetic-pcl-ros\
 ros-noetic-desktop-full
 
 
-## 4.1. Install base arena-rosnav-3d
+## 4.1. Install base arena-bench
 cd $HOME 
 mkdir -p catkin_ws/src && cd catkin_ws/src 
 git clone https://github.com/ignc-research/arena-bench -b main 
-cd arena-rosnav-3D
+cd arena-bench
 rosws update 
 cd ../.. 
 catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3 
 source ~/.${CURSHELL}r
 echo $'\n \
 source $HOME/catkin_ws/devel/setup.sh \n\
-export PYTHONPATH=$HOME/catkin_ws/src/arena-rosnav-3D:${PYTHONPATH}' >> ~/.${CURSHELL}rc 
+export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >> ~/.${CURSHELL}rc 
 
 ## 4.2. Include the actor-collision plugin
 cd $HOME
@@ -216,7 +216,7 @@ source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim
 sudo apt install python3-rosdep python3-rospkg
-cd ~/catkin_ws/src/arena-rosnav-3D
+cd ~/catkin_ws/src/arena-bench
 rosws update
 cd ~/catkin_ws
 rosdep install --from-paths src --ignore-src -r -y
