@@ -134,6 +134,7 @@ export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 source /usr/local/bin/virtualenvwrapper.sh" >> ~/.${CURSHELL}rc
 source /usr/local/bin/virtualenvwrapper.sh
 source ~/.${CURSHELL}rc
+mkvirtualenv --python=python3.8 rosnav
 
 source /opt/ros/${ROS_NAME_VERSION}/setup.${CURSHELL}
 source ~/catkin_ws/devel/setup.${CURSHELL}
