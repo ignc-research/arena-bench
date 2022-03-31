@@ -11,6 +11,8 @@ This repository provides the code used in our paper [Arena-Bench: A Benchmarking
 ## Benchmark scenarios
 ---
 ## Benchmark architecture
+<img width="250" src="/docs/imgs/architecture.png">
+The code is structured into a modular architecture with two models at its core.
 ---
 ## Running the Benchmark
 ### Prerequisites
