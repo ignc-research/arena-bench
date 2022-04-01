@@ -11,7 +11,6 @@ find_package(catkin REQUIRED COMPONENTS
         costmap_2d
         message_generation
         nav_core
-        nav_msgs
         roscpp
         std_msgs
         tf2
@@ -74,7 +73,6 @@ add_service_files(
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
         DEPENDENCIES
-        nav_msgs
         geometry_msgs
 )
 
@@ -108,7 +106,7 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-        CATKIN_DEPENDS costmap_2d message_generation nav_core nav_msgs roscpp std_msgs tf2 tf2_ros
+        CATKIN_DEPENDS costmap_2d message_generation roscpp std_msgs tf2 tf2_ros
 )
 
 ###########
