@@ -3,7 +3,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 # arena-bench
-This repository provides the code used in our paper [Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments](). The scop of this project is to benchmark performance of mobile robots in dynamic simulation environments.
+This repository provides the code used in our paper [Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments](docs/RAL_IROS22_arena_bench.pdf). The scope of this project is to benchmark performance of mobile robots in dynamic simulation environments.
 - [Benchmark scenarios](#benchmark-scenarios)
 - [Benchmark architecture](#benchmark-architecture)
 - [Running the Benchmark](#running-the-benchmark)
@@ -56,7 +56,31 @@ To install the repo run:
 wget https://raw.githubusercontent.com/ignc-research/arena-bench/main/setup.sh -O - | bash
 ```
 ### Manually running the benchmark
+You can run specific scenarios, be using the following syntax:
+<pre class="devsite-click-to-copy">
+roslaunch arena_bringup start_arena_gazebo.launch local_planner:=<var>PLANNER</var> world:=<var>WORLD</var> model:=<var>ROBOT</var> scenario_file:=<var>SCENARIO_FILE</var>
+</pre>
+with the choice of:
+- `PLANNER`: dwa, teb, mpc, rosnav, cadrl
+- `WORLD`: small_warehouse, map2, map5
+- `ROBOT`: turtlebot3_burger, jackal, rto
+- `SCENARIO_FILE`: map2_obs05.json, map2_obs10.json, map5_obs05.json, map5_obs10.json, small_warehouse_obs05.json, small_warehouse_obs10.json
+
+Example command:
+```bash
+workon rosnav
+roslaunch arena_bringup start_arena_gazebo.launch local_planner:dwa world:=map2 model:=turtlebot3_burger scenario_file:=map2_obs05.json
+```
 ---
 
 ## Thanks
+| **Name**            | **GitHub** | **Name**               | **GitHub** |
+| :------------------ | :--------- | :--------------------- | :--------- |
+| **Bassel Fatloun**  |  [eliastreis](https://github.com/eliastreis)    | **Johannes Cox**       | [JohannesCox](https://github.com/JohannesCox)           |
+| **Boris Meinardus** |  [sudo-Boris](https://github.com/sudo-Boris)    | **Linh Kästner**       | [linhdoan8](https://github.com/linhdoan8)           |
+| **Duc Pichel**      |  [Ducanor](https://github.com/Ducanor)          | **Niloufar Khorsandi** | [NiloufarKh](https://github.com/NiloufarKh)          |
+| **Elias Treis**     |  [eliastreis](https://github.com/eliastreis)          | **Reyk Carstens**      |   [ReykCS](https://github.com/ReykCS)         |
+| **Jens Lambrecht**  |            | **Teham Bhuiyan**      | [TehamC](https://github.com/TehamC)           |
+| **Jacek Kmiecik**   |  [Jacenty00](https://github.com/Jacenty00)         | **Tuan Anh Le**        |  [tuananhroman](https://github.com/tuananhroman)   |
+
 https://github.com/zal/simenvbenchmark#prerequisites
