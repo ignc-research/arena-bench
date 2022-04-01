@@ -1,3 +1,7 @@
+![](http://img.shields.io/badge/stability-stable-orange.svg?style=flat)
+[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+
 # arena-bench
 This repository provides the code used in our paper [Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments](). The scop of this project is to benchmark performance of mobile robots in dynamic simulation environments.
 - [Benchmark scenarios](#benchmark-scenarios)
