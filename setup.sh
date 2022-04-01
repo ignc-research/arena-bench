@@ -122,8 +122,8 @@ sudo apt-get update && sudo apt-get install -y \
   ros-noetic-lms1xx \
   ros-noetic-velodyne-description
 sudo apt install -y python3-pip
-sudo pip3 install --upgrade pip
-sudo pip3 install virtualenv virtualenvwrapper
+sudo pip install --upgrade pip
+sudo pip install virtualenv virtualenvwrapper
 cd $HOME && mkdir python_env # create a venv folder in your home directory
 echo "export WORKON_HOME=$HOME/python_env   #path to your venv folder
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3   #path to your python3
@@ -138,10 +138,10 @@ source ~/catkin_ws/devel/setup.${CURSHELL}
 source /usr/local/bin/virtualenvwrapper.sh
 workon rosnav
 
-pip3 install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed
-pip3 install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml numpy scikit-image Pillow rospkg tensorflow
-pip3 install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed \
-  pip3 install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml
+pip install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed
+pip install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml numpy scikit-image Pillow rospkg tensorflow
+pip install --extra-index-url https://rospypi.github.io/simple/ rospy rosbag tf tf2_ros --ignore-installed \
+  pip install pyyaml catkin_pkg netifaces pathlib filelock pyqt5 mpi4py torch lxml scipy defusedxml
 pip install PyQt5 --upgrade
 
 sudo apt-get -y update && apt-get install -y \
