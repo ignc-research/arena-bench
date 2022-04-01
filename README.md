@@ -3,7 +3,8 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 # arena-bench
-This repository provides the code used in our paper [Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments](docs/RAL_IROS22_arena_bench.pdf). The scope of this project is to benchmark performance of mobile robots in dynamic simulation environments.
+This repository provides the code used in our paper [Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments](docs/RAL_IROS22_arena_bench.pdf). The scope of this project is to benchmark dynamic obstacle avoidance approaches on different robotic systems in highly dynamic simulation environments.
+
 - [Benchmark scenarios](#benchmark-scenarios)
 - [Benchmark architecture](#benchmark-architecture)
 - [Running the Benchmark](#running-the-benchmark)
@@ -75,12 +76,3 @@ workon rosnav
 roslaunch arena_bringup start_arena_gazebo.launch local_planner:=dwa world:=map2 model:=turtlebot3_burger scenario_file:=map2_obs05.json
 ```
 ---
-
-## Thanks
-
-| **Name**        | **GitHub** | **Name**       | **GitHub** | **Name**           | **GitHub** |
-| :-------------- | :--------- | :------------- | :--------- | :----------------- | :--------- |
-| Bassel Fatloun  | [basselfa](https://github.com/basselfa)     | Jens Lambrecht |                                                  | Niloufar Khorsandi | [NiloufarKh](https://github.com/NiloufarKh)      |
-| Boris Meinardus | [sudo-Boris](https://github.com/sudo-Boris) | Jacek Kmiecik  | [Jacenty00](https://github.com/Jacenty00)        | Reyk Carstens      | [ReykCS](https://github.com/ReykCS)              |
-| Duc Pichel      | [Ducanor](https://github.com/Ducanor)       | Johannes Cox   | [JohannesCox](https://github.com/JohannesCox)    | Teham Bhuiyan      | [TehamC](https://github.com/TehamC)              |
-| Elias Treis     | [eliastreis](https://github.com/eliastreis) | Linh Kästner   | [linhdoan8](https://github.com/linhdoan8)        | Tuan Anh Le        | [tuananhroman](https://github.com/tuananhroman)  |
