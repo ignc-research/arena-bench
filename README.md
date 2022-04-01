@@ -31,13 +31,13 @@ The following clips show examples of the implemented scenarios:
 The repository is structured into a modular architecture with four models at its core.
 
 - [Arena-Tools](https://github.com/ignc-research/arena-tools):
-this module is being responsible to create custom worlds, scenarios and obstacles and adding those to the respictive location. It is possible to use arena-bench without arena-tools as a number of worlds, scenarios and obstacles have already been included into the world environments, including the all scenarios and worlds to reproduce this paper.
+this module is being responsible to create custom worlds, scenarios, and obstacles and adding those to the respective location. It is possible to use arena-bench without arena-tools as several worlds, scenarios and obstacles have already been included, including all scenarios and worlds to reproduce this paper.
 
 - [Arena-Rosnav](https://github.com/ignc-research/arena-rosnav):
-this module contains a custom task-generator and the 2D simulation engine Flatland, enabeling robot simulation in 2D Flatland environemnts (note that this repository has been added recently to the arena-bench repository, and is therefore not part of the original paper).
+this module contains a custom task-generator and the 2D simulation engine Flatland, enabling robot simulation in 2D Flatland environments (note that this repository has been added recently to the arena-bench repository, and is therefore not part of the original paper).
 
 - [Arena-Rosnav-3D](https://github.com/ignc-research/arena-rosnav-3D):
-this module contains a custom task-generator and the 3D simulation engine Gazebo, enabeling robot simulation in 3D Gazebo environments.
+this module contains a custom task-generator and the 3D simulation engine Gazebo, enabling robot simulation in 3D Gazebo environments.
 
 - [Arena-Evaluation](https://github.com/ignc-research/arena-evaluation):
 this module can be used to record and evaluate simulation runs and visualize Robot performance by creating qualitative and quantitative plots.
@@ -85,6 +85,3 @@ roslaunch arena_bringup start_arena_gazebo.launch local_planner:=dwa world:=map2
 | Boris Meinardus | [sudo-Boris](https://github.com/sudo-Boris) | Jacek Kmiecik  | [Jacenty00](https://github.com/Jacenty00)        | Reyk Carstens      | [ReykCS](https://github.com/ReykCS)              |
 | Duc Pichel      | [Ducanor](https://github.com/Ducanor)       | Johannes Cox   | [JohannesCox](https://github.com/JohannesCox)    | Teham Bhuiyan      | [TehamC](https://github.com/TehamC)              |
 | Elias Treis     | [eliastreis](https://github.com/eliastreis) | Linh Kästner   | [linhdoan8](https://github.com/linhdoan8)        | Tuan Anh Le        | [tuananhroman](https://github.com/tuananhroman)  |
-
-
-https://github.com/zal/simenvbenchmark#prerequisites
