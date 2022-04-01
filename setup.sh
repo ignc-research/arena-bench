@@ -186,7 +186,7 @@ git clone https://github.com/ignc-research/arena-bench -b main
 cd arena-bench && rosws update && cd ../..
 catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 source ~/.${CURSHELL}r
-echo $'\n \
+echo $'\n
 source $HOME/catkin_ws/devel/setup.sh \n\
 export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
 
