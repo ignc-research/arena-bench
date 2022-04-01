@@ -20,7 +20,9 @@ Benchmarking scenarios were developed uniquely combining the following component
 
 The following clips show examples of the implemented scenarios:
 
- <img width="400" height="400" src="/docs/imgs/map5-jackal.gif">  <img width="400" height="400" src="/docs/imgs/sw-burger.gif"> 
+
+| <img height="400" src="/docs/imgs/map5-jackal.gif"> | <img height="400" src="/docs/imgs/sw-burger.gif"> |
+| :--- | :--- |
 
 
 ---
