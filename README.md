@@ -74,13 +74,13 @@ roslaunch arena_bringup start_arena_gazebo.launch local_planner:dwa world:=map2 
 ---
 
 ## Thanks
-| **Name**            | **GitHub** | **Name**               | **GitHub** |
-| :------------------ | :--------- | :--------------------- | :--------- |
-| **Bassel Fatloun**  |  [eliastreis](https://github.com/eliastreis)    | **Johannes Cox**       | [JohannesCox](https://github.com/JohannesCox)           |
-| **Boris Meinardus** |  [sudo-Boris](https://github.com/sudo-Boris)    | **Linh Kästner**       | [linhdoan8](https://github.com/linhdoan8)           |
-| **Duc Pichel**      |  [Ducanor](https://github.com/Ducanor)          | **Niloufar Khorsandi** | [NiloufarKh](https://github.com/NiloufarKh)          |
-| **Elias Treis**     |  [eliastreis](https://github.com/eliastreis)          | **Reyk Carstens**      |   [ReykCS](https://github.com/ReykCS)         |
-| **Jens Lambrecht**  |            | **Teham Bhuiyan**      | [TehamC](https://github.com/TehamC)           |
-| **Jacek Kmiecik**   |  [Jacenty00](https://github.com/Jacenty00)         | **Tuan Anh Le**        |  [tuananhroman](https://github.com/tuananhroman)   |
+
+| **Name**        | **GitHub** | **Name**       | **GitHub** | **Name**           | **GitHub** |
+| :-------------- | :--------- | :------------- | :--------- | :----------------- | :--------- |
+| Bassel Fatloun  | [basselfa](https://github.com/basselfa)     | Jens Lambrecht |                                                  | Niloufar Khorsandi | [NiloufarKh](https://github.com/NiloufarKh)      |
+| Boris Meinardus | [sudo-Boris](https://github.com/sudo-Boris) | Jacek Kmiecik  | [Jacenty00](https://github.com/Jacenty00)        | Reyk Carstens      | [ReykCS](https://github.com/ReykCS)              |
+| Duc Pichel      | [Ducanor](https://github.com/Ducanor)       | Johannes Cox   | [JohannesCox](https://github.com/JohannesCox)    | Teham Bhuiyan      | [TehamC](https://github.com/TehamC)              |
+| Elias Treis     | [eliastreis](https://github.com/eliastreis) | Linh Kästner   | [linhdoan8](https://github.com/linhdoan8)        | Tuan Anh Le        | [tuananhroman](https://github.com/tuananhroman)  |
+
 
 https://github.com/zal/simenvbenchmark#prerequisites
