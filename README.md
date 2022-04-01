@@ -21,7 +21,7 @@ Benchmarking scenarios were developed uniquely combining the following component
 The following clips show examples of the implemented scenarios:
 
 
- <img height="350" src="/docs/imgs/map5-jackal.gif">   <img height="350" src="/docs/imgs/sw-burger.gif">
+ <img height="300" src="/docs/imgs/map5-jackal.gif">   <img height="300" src="/docs/imgs/sw-burger.gif">
 
 
 ---
