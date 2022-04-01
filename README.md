@@ -42,7 +42,7 @@ this module can be used to record and evaluate simulation runs and visualize Rob
 
 ---
 ## Running the Benchmark
-### Prerequisites
+#### Prerequisites
 Below is the software we used. We cannot guarantee older versions of the software to work. Yet, newer software is most likely working just fine.
 
 | Software      | Version        |
@@ -50,12 +50,12 @@ Below is the software we used. We cannot guarantee older versions of the softwar
 | OS            | Ubuntu 20.04.4 |
 | Python        | 3.8.10         |
 
-### Installation
+#### Installation
 To install the repo run:
 ```bash
 wget https://raw.githubusercontent.com/ignc-research/arena-bench/main/setup.sh -O - | bash
 ```
-### Manually running the benchmark
+#### Manually running the benchmark
 You can run specific scenarios, be using the following syntax:
 <pre class="devsite-click-to-copy">
 roslaunch arena_bringup start_arena_gazebo.launch local_planner:=<var>PLANNER</var> world:=<var>WORLD</var> model:=<var>ROBOT</var> scenario_file:=<var>SCENARIO_FILE</var>
