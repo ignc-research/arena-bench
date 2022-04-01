@@ -20,6 +20,8 @@ Benchmarking scenarios were developed uniquely combining the following component
 
 The following clips show examples of the implemented scenarios:
 
+ <img width="400" height="400" src="/docs/imgs/map5-jackal.gif">  <img width="400" height="400" src="/docs/imgs/sw-burger.gif"> 
+
 
 ---
 ## Benchmark architecture
@@ -69,7 +71,7 @@ with the choice of:
 Example command:
 ```bash
 workon rosnav
-roslaunch arena_bringup start_arena_gazebo.launch local_planner:dwa world:=map2 model:=turtlebot3_burger scenario_file:=map2_obs05.json
+roslaunch arena_bringup start_arena_gazebo.launch local_planner:=dwa world:=map2 model:=turtlebot3_burger scenario_file:=map2_obs05.json
 ```
 ---
 
