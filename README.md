@@ -16,7 +16,7 @@ This repository provides the code used in our paper [Arena-Bench: A Benchmarking
 Benchmarking scenarios were developed uniquely combining the following components
 | **Robot** | **World**  | **Planner**  | **Obstacles** |
 | :-------- | :------------ | :---------- | :------- |
-| - `jackal` [dff-drive] <br> - `burger` [car-like] <br> - `robotino` (rto) [holonomic] | - `small_warehouse` <br> - `map2` <br> - `map5` | - `teb` <br> - `dwa` <br> - `mpc` <br> - `rosnav` <br> - `cadrl` <br>  | - `5` <br> - `10` |
+| - `jackal`  <br> - `burger` <br> - `robotino` (rto) | - `small_warehouse` <br> - `map2` <br> - `map5` | - `teb` <br> - `dwa` <br> - `mpc` <br> - `rosnav` <br> - `cadrl` <br>  | - `5` <br> - `10` |
 
 The following clips show examples of the implemented scenarios:
 
