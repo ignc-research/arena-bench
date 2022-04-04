@@ -167,6 +167,7 @@ source ~/.${CURSHELL}rc
 echo '
 source $HOME/catkin_ws/devel/setup.sh
 export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
+source ~/.${CURSHELL}rc
 
 ## 4.2. Include the actor-collision plugin
 cd $HOME && git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
@@ -176,6 +177,8 @@ cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
 
 ## 4.3. Install Pedsim
 cd ~/catkin_ws/src/arena-bench && rosws update && cd ~/catkin_ws
+source ~/.${CURSHELL}rc
+catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 rosdep install --from-paths src --ignore-src -r -y
 cd ~/catkin_ws/src/forks/pedsim_ros
 git submodule update --init --recursive
