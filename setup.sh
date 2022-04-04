@@ -158,7 +158,7 @@ sudo apt-get -y update && apt-get install -y \
   ros-noetic-desktop-full
 
 ## 4.1. Install base arena-bench
-cd $HOME && mkdir -p catkin_ws/src && cd catkin_ws/src
+cd $HOME && mkdir -p catkin_ws/src && cd ~/catkin_ws/src
 git clone https://github.com/ignc-research/arena-bench -b main
 cd arena-bench && rosws update && cd ../..
 catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
@@ -176,11 +176,10 @@ cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
 >>~/.${CURSHELL}rc && source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim
-cd ~/catkin_ws/src/arena-bench && rosws update && cd ~/catkin_ws
-source ~/.${CURSHELL}rc
-catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
-rosdep install --from-paths src --ignore-src -r -y
-cd ~/catkin_ws/src/forks/pedsim_ros
-git submodule update --init --recursive
-cd ../../.. && catkin_make --only-pkg-with-deps spencer_tracking_rviz_plugin
-catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+
+# catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
+# rosdep install --from-paths src --ignore-src -r -y
+# cd ~/catkin_ws/src/forks/pedsim_ros
+# git submodule update --init --recursive
+# cd ../../.. && catkin_make --only-pkg-with-deps spencer_tracking_rviz_plugin
+# catkin_make -DCATKIN_WHITELIST_PACKAGES=""
