@@ -104,17 +104,6 @@ source $HOME/.${CURSHELL}rc
 
 # install required dependencies + virtual env
 sudo apt-get update && sudo apt-get install -y \
-  libopencv-dev \
-  liblua5.2-dev \
-  screen \
-  python3-rosdep \
-  python3-rosinstall \
-  python3-rosinstall-generator \
-  build-essential \
-  python3-rospkg-modules \
-  ros-noetic-navigation \
-  ros-noetic-teb-local-planner \
-  ros-noetic-mpc-local-planner \
   libarmadillo-dev \
   ros-noetic-nlopt \
   ros-noetic-turtlebot3-description \
@@ -152,7 +141,6 @@ sudo apt-get -y update && apt-get install -y \
   vim \
   git \
   original-awk \
-  python3-pip \
   screen \
   libopencv-dev \
   liblua5.2-dev &&
@@ -160,33 +148,23 @@ sudo apt-get -y update && apt-get install -y \
   apt-get install -y libqtcore4
 
 sudo apt-get -y update && apt-get install -y \
-  python3-rosdep \
-  python3-rosinstall \
-  python3-rosinstall-generator \
-  build-essential \
   python3-rospkg-modules \
   ros-noetic-navigation \
   ros-noetic-teb-local-planner \
   ros-noetic-mpc-local-planner \
-  libarmadillo-dev \
-  ros-noetic-nlopt \
-  ros-noetic-turtlebot3-description \
-  ros-noetic-turtlebot3-navigation \
-  ros-noetic-lms1xx \
-  ros-noetic-velodyne-description \
   python3-catkin-pkg-modules \
   python3-empy \
   python3-setuptools \
-  libarmadillo-dev \
-  ros-noetic-pcl-conversionsros-noetic-pcl-rosros-noetic-desktop-full
+  ros-noetic-desktop-full
 
 ## 4.1. Install base arena-bench
 cd $HOME && mkdir -p catkin_ws/src && cd catkin_ws/src
 git clone https://github.com/ignc-research/arena-bench -b main
 cd arena-bench && rosws update && cd ../..
 catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
-source ~/.${CURSHELL}r
-echo $'\n
+source devel/setup.${CURSHELL}
+source ~/.${CURSHELL}rc
+echo '\n
 source $HOME/catkin_ws/devel/setup.sh \n\
 export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
 
