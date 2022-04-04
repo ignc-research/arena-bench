@@ -164,14 +164,14 @@ cd arena-bench && rosws update && cd ../..
 catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
 source devel/setup.${CURSHELL}
 source ~/.${CURSHELL}rc
-echo '\n
-source $HOME/catkin_ws/devel/setup.sh \n\
+echo '
+source $HOME/catkin_ws/devel/setup.sh
 export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
 
 ## 4.2. Include the actor-collision plugin
 cd $HOME && git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
 cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
-"export GAZEBO_PLUGIN_PATH=$HOME/ActorCollisionsPlugin/build "
+"export GAZEBO_PLUGIN_PATH=$HOME/ActorCollisionsPlugin/build"
 >>~/.${CURSHELL}rc && source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim

@@ -16,8 +16,8 @@
   <build_depend>gazebo_ros</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>libgazebo11-dev</build_depend>
-  <build_depend>std_srvs</build_depend>
   <build_depend>nav_msgs</build_depend>
+  <build_depend>std_srvs</build_depend>
   <build_depend>tf</build_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
@@ -36,9 +36,9 @@
   <exec_depend>urdf</exec_depend>
 
   <export>
-    <gazebo_ros plugin_path="${prefix}/worlds/aws_house/lib" gazebo_media_path="${prefix}/worlds/aws_house" gazebo_model_path="${prefix}/worlds/aws_house/models"/>
+    <gazebo_ros plugin_path="${prefix}/worlds/aws_house/lib"        gazebo_media_path="${prefix}/worlds/aws_house"        gazebo_model_path="${prefix}/worlds/aws_house/models"/>
     <gazebo_ros plugin_path="${prefix}/worlds/turtlebot3_house/lib" gazebo_media_path="${prefix}/worlds/turtlebot3_house" gazebo_model_path="${prefix}/worlds/turtlebot3_house/models"/>
-    <gazebo_ros plugin_path="${prefix}/worlds/small_warehouse/lib" gazebo_media_path="${prefix}/worlds/small_warehouse" gazebo_model_path="${prefix}/worlds/small_warehouse/models"/>
+    <gazebo_ros plugin_path="${prefix}/worlds/small_warehouse/lib"  gazebo_media_path="${prefix}/worlds/small_warehouse"  gazebo_model_path="${prefix}/worlds/small_warehouse/models"/>
     <gazebo_ros gazebo_model_path="${prefix}/models"/>
 
   </export>
