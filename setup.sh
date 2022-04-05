@@ -158,22 +158,30 @@ sudo apt-get -y update && apt-get install -y \
   ros-noetic-desktop-full
 
 ## 4.1. Install base arena-bench
-cd $HOME && mkdir -p catkin_ws/src && cd ~/catkin_ws/src
-git clone https://github.com/ignc-research/arena-bench -b main
-cd arena-bench && rosws update && cd ../..
-catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
-source devel/setup.${CURSHELL}
-source ~/.${CURSHELL}rc
-echo '
-source $HOME/catkin_ws/devel/setup.sh
-export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
+cd $HOME
+$FOLDER = 'catkin_ws'
+if [ ! -d "$FOLDER" ]; then
+  mkdir -p catkin_ws/src && cd ~/catkin_ws/src
+  git clone https://github.com/ignc-research/arena-bench -b main
+  cd arena-bench && rosws update && cd ../..
+  catkin_make -DCMAKE_BUILD_TYPE=Release -DPYTHON_EXECUTABLE=/usr/bin/python3
+  source devel/setup.${CURSHELL}
+  source ~/.${CURSHELL}rc
+  echo '
+  source $HOME/catkin_ws/devel/setup.sh
+  export PYTHONPATH=$HOME/catkin_ws/src/arena-bench:${PYTHONPATH}' >>~/.${CURSHELL}rc
+fi
 source ~/.${CURSHELL}rc
 
 ## 4.2. Include the actor-collision plugin
-cd $HOME && git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
-cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
-"export GAZEBO_PLUGIN_PATH=~/ActorCollisionsPlugin/build"
->>~/.${CURSHELL}rc
+cd $HOME
+$FOLDER = 'ActorCollisionsPlugin'
+if [ ! -d "$FOLDER" ]; then
+  git clone https://github.com/ignc-research/ActorCollisionsPlugin
+  cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
+  "export GAZEBO_PLUGIN_PATH=~/ActorCollisionsPlugin/build"
+  >>~/.${CURSHELL}rc
+fi
 source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim
