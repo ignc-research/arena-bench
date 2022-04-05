@@ -172,8 +172,9 @@ source ~/.${CURSHELL}rc
 ## 4.2. Include the actor-collision plugin
 cd $HOME && git clone https://github.com/eliastreis/ActorCollisionsPlugin.git
 cd ActorCollisionsPlugin && mkdir build && cd build && cmake .. && make && echo
-"export GAZEBO_PLUGIN_PATH=$HOME/ActorCollisionsPlugin/build"
->>~/.${CURSHELL}rc && source ~/.${CURSHELL}rc
+"export GAZEBO_PLUGIN_PATH=~/ActorCollisionsPlugin/build"
+>>~/.${CURSHELL}rc
+source ~/.${CURSHELL}rc
 
 ## 4.3. Install Pedsim
 
