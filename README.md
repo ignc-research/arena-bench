@@ -2,8 +2,8 @@
 [![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
-# arena-bench
-This repository provides the code used in our paper "Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments" (preprint coming soon). The scope of this project is to benchmark dynamic obstacle avoidance approaches on different robotic systems in highly dynamic simulation environments.
+# arena-bench (IEEE Robotics and Automation Letters (RA-L), 2022)
+This repository provides the code used in our paper ["Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments"](https://arxiv.org/abs/2206.05728). The scope of this project is to benchmark dynamic obstacle avoidance approaches on different robotic systems in highly dynamic simulation environments.
 
 - [Benchmark scenarios](#benchmark-scenarios)
 - [Benchmark architecture](#benchmark-architecture)
@@ -12,6 +12,19 @@ This repository provides the code used in our paper "Arena-Bench: A Benchmarking
     - [Installation](#installation)
     - [Manually running the benchmark](#manually-running-the-benchmark)
 - [Thanks](#thanks)
+
+If you find this repository useful, please cite our paper
+```
+@misc{arena-bench,
+  doi = {10.48550/ARXIV.2206.05728},
+  url = {https://arxiv.org/abs/2206.05728},
+  author = {Kästner, Linh and Bhuiyan, Teham and Le, Tuan Anh and Treis, Elias and Cox, Johannes and Meinardus, Boris and Kmiecik, Jacek and Carstens, Reyk and Pichel, Duc and Fatloun, Bassel and Khorsandi, Niloufar and Lambrecht, Jens},
+  title = {Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments},
+  publisher = {arXiv},
+  year = {2022}
+}
+
+```
 ---
 ## Benchmark scenarios
 Benchmarking scenarios were developed uniquely combining the following components
