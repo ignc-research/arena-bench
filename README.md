@@ -15,12 +15,15 @@ This repository provides the code used in our paper ["Arena-Bench: A Benchmarkin
 
 If you find this repository useful, please cite our paper
 ```
-@article{kastner2022arena,
-  title={Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments},
-  author={K{\"a}stner, Linh and Bhuiyan, Teham and Le, Tuan Anh and Treis, Elias and Cox, Johannes and Meinardus, Boris and Kmiecik, Jacek and Carstens, Reyk and Pichel, Duc and Fatloun, Bassel and others},
-  journal={arXiv preprint arXiv:2206.05728},
-  year={2022}
-}
+@ARTICLE{9827557,
+
+  author={Kästner, Linh and Bhuiyan, Teham and Le, Tuan Anh and Treis, Elias and Cox, Johannes and Meinardus, Boris and Kmiecik, Jacek and Carstens, Reyk and Pichel, Duc and Fatloun, Bassel and Khorsandi, Niloufar and Lambrecht, Jens},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments}, 
+  year={2022},
+  pages={1-8},
+  doi={10.1109/LRA.2022.3190086}}
+
 ```
 ---
 ## Benchmark scenarios
