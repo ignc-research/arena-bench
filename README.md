@@ -3,7 +3,7 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 # Arena-bench (RA-L and IROS 22)
-This repository provides the code used in our paper ["Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments"](https://arxiv.org/abs/2206.05728) (accepted for publication in the IEEE Robotics and Automation Letters). The scope of this project is to provide a benchmark suite to compare and evaluate classic and learning-based dynamic obstacle avoidance approaches on different robotic systems in highly dynamic simulation environments.
+This repository provides the code used in our paper ["Arena-Bench: A Benchmarking Suite for Obstacle Avoidance Approaches in Highly Dynamic Environments"](https://arxiv.org/abs/2206.05728) (accepted for publication in the IEEE Robotics and Automation Letters). The scope of this project is to provide a benchmark suite to compare and evaluate classic and learning-based dynamic obstacle avoidance approaches on different robotic systems in highly dynamic simulation environments. [Link to demo video.](https://www.youtube.com/watch?v=1YIHD0gBEEE&t=8s)
 
 - [Benchmark scenarios](#benchmark-scenarios)
 - [Benchmark architecture](#benchmark-architecture)
